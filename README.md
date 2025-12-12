@@ -87,6 +87,7 @@ Nginx（エンジンエックス）は、高速で軽量なオープンソース
 - sudo nano index.html
 4. エディタが開くので以下の内容を書き込み保存
 
+```html
 <!DOCTYPE html>
 <html>
 <head>
