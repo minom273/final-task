@@ -2,32 +2,29 @@
 
 ## 1. 概要
 本手順書では、初期状態からUbuntu上にサーバーを構築し、  
-発展要素として **△△ を追加**したサーバ環境を再現可能な手順としてまとめる。
+発展要素としてNginxを追加したサーバ環境を再現可能な手順としてまとめる。
 
 ---
 
 ## 2. 前提条件
 
 ### 2.1 使用環境
-- クライアントOS：Windows（WSL2 上の Ubuntu）
-- サーバOS：Ubuntu 22.04 LTS
-- 実行環境：WSL2 / 学内クラウド / VirtualBox（どれを使用したか明記）
+- クライアントOS：Windows 10（WSL2 上で作業）
+- サーバOS：Ubuntu 22.04 LTS（WSL2 上）
+- 実行環境：WSL2
+
+本手順書では、Windows 上で WSL2 を利用し、その中の Ubuntu をサーバ環境として構築した。
 
 ### 2.2 使用ポート
-- 22 / SSH
-- 80 / HTTP
-- 443 / HTTPS（必要な場合）
-- その他（アプリや DB を利用する場合）
+- 22 / SSH（WSL2 内の環境のため外部接続は行わない）
+- 80 / HTTP（Nginx による Web ページ公開）
+- 443 / HTTPS（未使用）
+- その他のポート：なし
 
----
 
-## 3. 全体構成図（任意・推奨）
+## 3. 初期設定手順
 
-※ `images/architecture.png` をここに貼
-
-## 4. 初期設定手順
-
-### 4.1　Ubuntuのインストール
+### 3.1　Ubuntuのインストール
 
 1. PowerShell(管理者)を開き以下のコマンドを実行し、WSLとUbuntuをインストールする
 - wsl --install
@@ -40,12 +37,12 @@
 5. Ubuntuを再起動し以下のコマンドを実行してWindows側のVSCodeをUbuntuと連携する
 - code .
 
-### 4.2 新規ユーザー作成
+### 3.2 新規ユーザー作成
 - 以下のコマンドを実行する
 sudo adduser <username>
 sudo usermod -aG sudo <username>
 
-### 4.3 SSH公開鍵設定
+### 3.3 SSH公開鍵設定
 1. 以下のコマンドで鍵ペアを作成する（2025年現在最も推奨されているEd25519を使用）
 - ssh-keygen -t ed25519
 2. 以下のコマンドでサーバーに公開鍵を転送・登録する
@@ -56,7 +53,7 @@ sudo usermod -aG sudo <username>
 - PasswordAuthentication no
 5. SSHサービスを再起動する
 
-### 4.4 ファイアウォール設定
+### 3.4 ファイアウォール設定
 1. ファイアウォールをインストールする
 - sudo apt update
 - sudo apt install ufw
@@ -73,12 +70,12 @@ sudo usermod -aG sudo <username>
 - 確認
   sudo ufw status verbose 
 
-## 5. 発展要素　Nginx
-### 5.1 Nginxとは？
+## 4. 発展要素　Nginx
+### 4.1 Nginxとは？
 Nginx（エンジンエックス）は、高速で軽量なオープンソースのWebサーバーであり、静的コンテンツをメインに大規模な処理や並列処理を得意とする。
 本手順書では、このNginxを用いてWebサーバー環境を構築する。
 
-### 5.2 Nginxによる静的サイト運営
+### 4.2 Nginxによる静的サイト運営
 1. 以下のコマンドでNignxをインストールする
 - sudo apt install nginx
 2. 以下のコマンドで/var/www/htmlに移動
@@ -108,10 +105,3 @@ http://localhost/
 7. 動作確認
 以下のような画面が表示されることを確認する
 ![自作ページが表示されている画像](images/web-page.png)
-
-
-
-
-
-
-
