@@ -30,15 +30,15 @@
 ### 4.1　Ubuntuのインストール
 
 1. PowerShell(管理者)を開き以下のコマンドを実行し、WSLとUbuntuをインストールする
-　wsl --install
+- wsl --install
 2. Ubuntuの初期設定を行う
 - Windows再起動後Ubuntuが自動で起動するため任意のユーザー名とパスワードを入力する
 3. Ubuntuのターミナルで以下のコマンドを実行し、Ubuntuを最新版に更新する
- sudo apt update && sudo apt upgrate -y
-4. VSCodeを開き拡張機能"Remote Development"をインストールする
+- sudo apt update && sudo apt upgrate -y
+4. VSCodeを開き拡張機能"Remote Development"をンストールする
 - "WSL"、"Dev Container"も自動でインストールされる
 5. Ubuntuを再起動し以下のコマンドを実行してWindows側のVSCodeをUbuntuと連携する
-　code .
+- code .
 
 ### 4.2 新規ユーザー作成
 - 以下のコマンドを実行する
@@ -47,22 +47,22 @@ sudo usermod -aG sudo <username>
 
 ### 4.3 SSH公開鍵設定
 1. 以下のコマンドで鍵ペアを作成する（2025年現在最も推奨されているEd25519を使用）
-　ssh-keygen -t ed25519
+- ssh-keygen -t ed25519
 2. 以下のコマンドでサーバーに公開鍵を転送・登録する
-　ssh-copy-id -i ~/.ssh/id_ed25519.pub username@192.168.1.10
+- ssh-copy-id -i ~/.ssh/id_ed25519.pub username@192.168.1.10
 3. 以下のコマンドで設定ファイルを開く
-　sudo vim /etc/ssh/sshd_config
+- sudo vim /etc/ssh/sshd_config
 4. 挿入モードで設定ファイルを以下のように編集しパスワード認証を無効化する
-  PasswordAuthentication no
+- PasswordAuthentication no
 5. SSHサービスを再起動する
 
 ### 4.4 ファイアウォール設定
 1. ファイアウォールをインストールする
-　sudo apt update
-　sudo apt install ufw
+- sudo apt update
+- sudo apt install ufw
 2. 以下のコマンドで設定を行う
 - デフォルトを拒否に設定
-　sudo ufw default deny incoming
+  sudo ufw default deny incoming
 - SSH接続を許可
   sudo ufw allow ssh
 - Webアクセスを許可
@@ -80,12 +80,13 @@ Nginx（エンジンエックス）は、高速で軽量なオープンソース
 
 ### 5.2 Nginxによる静的サイト運営
 1. 以下のコマンドでNignxをインストールする
-sudo apt install nginx
+- sudo apt install nginx
 2. 以下のコマンドで/var/www/htmlに移動
-cd /var/www/html
+- cd /var/www/html
 3. 新しいindex.htmlを作成
-sudo nano index.html
+- sudo nano index.html
 4. エディタが開くので以下の内容を書き込み保存
+
 <!DOCTYPE html>
 <html>
 <head>
