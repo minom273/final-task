@@ -99,6 +99,7 @@ Nginx（エンジンエックス）は、高速で軽量なオープンソース
     <p>Nginx で自作ページを公開しました。</p>
 </body>
 </html>
+```
 
 5. Nginxを再起動する
 sudo systemctl restart nginx
