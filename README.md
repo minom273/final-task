@@ -62,7 +62,7 @@ sudo usermod -aG sudo <username>
 　sudo apt install ufw
 2. 以下のコマンドで設定を行う
 - デフォルトを拒否に設定
-  sudo ufw default deny incoming
+　sudo ufw default deny incoming
 - SSH接続を許可
   sudo ufw allow ssh
 - Webアクセスを許可
@@ -72,4 +72,43 @@ sudo usermod -aG sudo <username>
   sudo ufw enable
 - 確認
   sudo ufw status verbose 
+
+## 5. 発展要素　Nginx
+### 5.1 Nginxとは？
+Nginx（エンジンエックス）は、高速で軽量なオープンソースのWebサーバーであり、静的コンテンツをメインに大規模な処理や並列処理を得意とする。
+本手順書では、このNginxを用いてWebサーバー環境を構築する。
+
+### 5.2 Nginxによる静的サイト運営
+1. 以下のコマンドでNignxをインストールする
+sudo apt install nginx
+2. 以下のコマンドで/var/www/htmlに移動
+cd /var/www/html
+3. 新しいindex.htmlを作成
+sudo nano index.html
+4. エディタが開くので以下の内容を書き込み保存
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Test Page</title>
+</head>
+<body>
+    <h1>Web サーバー構築成功！</h1>
+    <p>Nginx で自作ページを公開しました。</p>
+</body>
+</html>
+
+5. Nginxを再起動する
+sudo systemctl restart nginx
+6. ブラウザで以下を入力する
+http://localhost/
+7. 動作確認
+以下のような画面が表示されることを確認する
+![自作ページが表示されている画像](images/web-page.png)
+
+
+
+
+
+
 
